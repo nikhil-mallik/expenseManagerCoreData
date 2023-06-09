@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22E261" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="CategoryEntity" representedClassName=".CategoryEntity" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="budget" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="catId" optional="YES" attributeType="String"/>
+        <attribute name="imageURL" optional="YES" attributeType="Binary"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="totalAmount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="uid" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ExpenseEntity" representedClassName=".ExpenseEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="catId" optional="YES" attributeType="String"/>
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="expAmt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="expId" optional="YES" attributeType="String"/>
+        <attribute name="imageURL" optional="YES" attributeType="Binary"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <fetchRequest name="Category" entity="CategoryEntity" predicateString="uid CONTAINS &quot;&quot; AND totalAmount == 0 AND title CONTAINS &quot;&quot; AND time == CAST(707640583.097975, &quot;NSDate&quot;) AND imageURL CONTAINS &quot;&quot; AND catId CONTAINS &quot;&quot; AND budget == 0"/>
+    <fetchRequest name="Expense" entity="ExpenseEntity" predicateString="time == CAST(707640595.876724, &quot;NSDate&quot;) AND imageURL CONTAINS &quot;&quot; AND expAmt == 0 AND desc CONTAINS &quot;&quot; AND catId CONTAINS &quot;&quot;"/>
+</model>
