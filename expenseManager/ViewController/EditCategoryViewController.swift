@@ -62,6 +62,7 @@ class EditCategoryViewController: UIViewController {
         imageViewOutlet.contentMode = .scaleAspectFill
         imageViewOutlet.layer.cornerRadius = min(imageViewOutlet.frame.size.width, imageViewOutlet.frame.size.height) / 2
         imageViewOutlet.layer.masksToBounds = true
+        navigationController?.navigationBar.tintColor = .black
     }
     
     // MARK: Actions

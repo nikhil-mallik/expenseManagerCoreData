@@ -156,6 +156,19 @@ class CategoryViewController: UIViewController {
         }
     }
     
+    func deleteCategory(at indexPath: IndexPath) {
+        let category = cardData[indexPath.row]
+        
+        ConfirmationDialogHelper.showConfirmationDialog(on: self,
+                                                        title: "Delete Category",
+                                                        message: "Are you sure you want to delete \(category.titleOutlet)?",
+                                                        confirmActionTitle: "Delete",
+                                                        cancelActionTitle: "Cancel") { [weak self] in
+            // Perform delete operation here
+            self?.handleDeleteAction(at: indexPath)
+        }
+    }
+    
     func handleDeleteAction(at indexPath: IndexPath) {
         let category = cardData[indexPath.row]
         guard let managedObjectContext = managedObjectContext else {

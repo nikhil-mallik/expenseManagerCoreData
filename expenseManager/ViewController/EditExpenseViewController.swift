@@ -50,7 +50,7 @@ class EditExpenseViewController: UIViewController {
         imagePickerHelper = ImagePickerHelper()
         imageViewOutlet.layer.cornerRadius = min(imageViewOutlet.frame.size.width, imageViewOutlet.frame.size.height) / 2
         imageViewOutlet.layer.masksToBounds = true
-        
+        navigationController?.navigationBar.tintColor = .black
         guard let documentId = documentId,
               let managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
             return

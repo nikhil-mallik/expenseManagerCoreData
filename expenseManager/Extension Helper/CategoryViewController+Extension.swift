@@ -63,7 +63,7 @@ extension CategoryViewController: UITableViewDelegate {
         
         let delete = UIContextualAction(style: .normal,
                                         title: "Delete") { [weak self] (action, view, completionHandler) in
-            self?.handleDeleteAction(at: indexPath)
+            self?.deleteCategory(at: indexPath)
             completionHandler(true)
         }
         delete.backgroundColor = .systemRed

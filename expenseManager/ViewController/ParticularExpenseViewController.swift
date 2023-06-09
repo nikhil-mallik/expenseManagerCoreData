@@ -199,6 +199,19 @@ class ParticularExpenseViewController: UIViewController {
         editExpenseViewController.newLimit = newlimitAmount
         navigationController?.pushViewController(editExpenseViewController, animated: true)
     }
+    
+    func deleteExpense(at indexPath: IndexPath) {
+        let expense = expenses[indexPath.row]
+        
+        ConfirmationDialogHelper.showConfirmationDialog(on: self,
+                                                        title: "Delete Expense",
+                                                        message: "Are you sure you want to delete this expense?",
+                                                        confirmActionTitle: "Delete",
+                                                        cancelActionTitle: "Cancel") { [weak self] in
+            // Perform delete operation here
+            self?.deleteButtonTapped(at: indexPath)
+        }
+    }
 
     func deleteButtonTapped(at indexPath: IndexPath) {
         let expense = expenses[indexPath.row]
@@ -229,7 +242,7 @@ class ParticularExpenseViewController: UIViewController {
             print("Error fetching expense: \(error.localizedDescription)")
         }
     }
-
+ 
     func updateCategoryTotalExpenseAmount(categoryDocumentId: String, totalExpense: Int) {
         let fetchRequest: NSFetchRequest<CategoryEntity> = CategoryEntity.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "catId == %@", categoryDocumentId)

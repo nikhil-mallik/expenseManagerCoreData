@@ -53,7 +53,7 @@ extension ParticularExpenseViewController: UITableViewDelegate {
         edit.backgroundColor = .systemBlue
         
         let delete = UIContextualAction(style: .normal, title: "Delete") { [weak self] (action, view, completionHandler) in
-            self?.deleteButtonTapped(at: indexPath)
+            self?.deleteExpense(at: indexPath)
             completionHandler(true)
         }
         delete.backgroundColor = .systemRed
