@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:CategoryEntity+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:CategoryEntity+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:ExpenseEntity+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:ExpenseEntity+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:expenseManager.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>
