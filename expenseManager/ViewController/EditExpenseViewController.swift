@@ -46,11 +46,12 @@ class EditExpenseViewController: UIViewController {
     
     // MARK: Helper Methods
     func setupUI() {
+        cornerRadius()
         imageViewOutlet.contentMode = .scaleAspectFill
         imagePickerHelper = ImagePickerHelper()
         imageViewOutlet.layer.cornerRadius = min(imageViewOutlet.frame.size.width, imageViewOutlet.frame.size.height) / 2
         imageViewOutlet.layer.masksToBounds = true
-        
+        navigationController?.navigationBar.tintColor = .black
         guard let documentId = documentId,
               let managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
             return
@@ -77,7 +78,16 @@ class EditExpenseViewController: UIViewController {
             print("Error fetching expense: \(error.localizedDescription)")
         }
     }
-    
+   
+  
+   
+
+    func cornerRadius() {
+        CornerRadiusHelper.applyCornerRadius(expAmtOutlet )
+        CornerRadiusHelper.applyCornerRadius(uploadImageOutlet )
+        CornerRadiusHelper.applyCornerRadius(updateBtnOutlet )
+        CornerRadiusHelper.applyCornerRadius(descOutlet)
+    }
     func fetchCategory(with categoryId: String) -> CategoryEntity? {
         guard let managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
             return nil

@@ -12,6 +12,4 @@ class ParticularExpenseTableViewCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var expAmtOutlet: UILabel!
     @IBOutlet weak var descOutlet: UILabel!
-    
-
 }

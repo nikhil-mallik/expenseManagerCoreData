@@ -22,6 +22,18 @@ extension ParticularExpenseViewController: UITableViewDataSource {
         cell.expAmtOutlet.text = "Paid: \(expense.expenseAmount)"
         cell.descOutlet.text = expense.description
         
+        /// Set the corner radius for specific corners of the imageView in the cell
+        let cornerRadius: CGFloat = 15
+        let maskedCorners: UIRectCorner = [.topLeft, .topRight]
+        
+        let path = UIBezierPath(roundedRect: cell.iconImageView.bounds, byRoundingCorners: maskedCorners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+        
+        // Create a shape layer
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+                
+                // Apply the shape layer as a mask to the imageView's layer
+                cell.iconImageView.layer.mask = shapeLayer
         // Set the image from data or use a placeholder image if the data is invalid
         if let image = UIImage(data: expense.imageURL) {
             cell.iconImageView.contentMode = .scaleAspectFill
@@ -38,7 +50,7 @@ extension ParticularExpenseViewController: UITableViewDataSource {
 
 extension ParticularExpenseViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 125
+        return 150
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -53,7 +65,7 @@ extension ParticularExpenseViewController: UITableViewDelegate {
         edit.backgroundColor = .systemBlue
         
         let delete = UIContextualAction(style: .normal, title: "Delete") { [weak self] (action, view, completionHandler) in
-            self?.deleteButtonTapped(at: indexPath)
+            self?.deleteExpense(at: indexPath)
             completionHandler(true)
         }
         delete.backgroundColor = .systemRed

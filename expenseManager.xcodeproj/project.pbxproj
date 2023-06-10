@@ -26,6 +26,7 @@
 		7D8E91662A331F0B0092DB61 /* EditExpenseViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E91652A331F0B0092DB61 /* EditExpenseViewController+Extension.swift */; };
 		7D8E91682A3326F90092DB61 /* EditCategoryViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E91672A3326F90092DB61 /* EditCategoryViewController+Extension.swift */; };
 		7D8E916A2A332EAD0092DB61 /* AddCategoryViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E91692A332EAD0092DB61 /* AddCategoryViewController+Extension.swift */; };
+		7D8E91882A3464850092DB61 /* CornerRadiusHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E91872A3464850092DB61 /* CornerRadiusHelper.swift */; };
 		7D9B85DB2A25BA2E0007DA77 /* EditExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9B85DA2A25BA2E0007DA77 /* EditExpenseViewController.swift */; };
 		7D9B85DD2A25CB7A0007DA77 /* ParticularExpenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9B85DC2A25CB7A0007DA77 /* ParticularExpenseTableViewCell.swift */; };
 		7D9B85DF2A25CCB60007DA77 /* ParticularExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9B85DE2A25CCB60007DA77 /* ParticularExpenseViewController.swift */; };
@@ -59,6 +60,7 @@
 		7D8E91652A331F0B0092DB61 /* EditExpenseViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditExpenseViewController+Extension.swift"; sourceTree = "<group>"; };
 		7D8E91672A3326F90092DB61 /* EditCategoryViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditCategoryViewController+Extension.swift"; sourceTree = "<group>"; };
 		7D8E91692A332EAD0092DB61 /* AddCategoryViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddCategoryViewController+Extension.swift"; sourceTree = "<group>"; };
+		7D8E91872A3464850092DB61 /* CornerRadiusHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusHelper.swift; sourceTree = "<group>"; };
 		7D9B85DA2A25BA2E0007DA77 /* EditExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseViewController.swift; sourceTree = "<group>"; };
 		7D9B85DC2A25CB7A0007DA77 /* ParticularExpenseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticularExpenseTableViewCell.swift; sourceTree = "<group>"; };
 		7D9B85DE2A25CCB60007DA77 /* ParticularExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticularExpenseViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				7D9EE9892A2091D900C1440A /* CustomTableViewCell.swift */,
 				7D9B85DC2A25CB7A0007DA77 /* ParticularExpenseTableViewCell.swift */,
 				7D4CE7EA2A1F7781007972C7 /* images.xcassets */,
+				7D8E91872A3464850092DB61 /* CornerRadiusHelper.swift */,
 			);
 			path = Utlis;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				7D49099D2A21BAD80092E185 /* CategoryViewController.swift in Sources */,
 				7D8E91662A331F0B0092DB61 /* EditExpenseViewController+Extension.swift in Sources */,
 				7DE14EB02A1F7555002E29E1 /* AppDelegate.swift in Sources */,
+				7D8E91882A3464850092DB61 /* CornerRadiusHelper.swift in Sources */,
 				7D4CE7E42A1F7729007972C7 /* phoneViewController.swift in Sources */,
 				7D8E91592A30A89C0092DB61 /* ImageHelper.swift in Sources */,
 				7D4CE7E62A1F7739007972C7 /* otpViewController.swift in Sources */,
