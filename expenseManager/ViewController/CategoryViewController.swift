@@ -58,7 +58,7 @@ class CategoryViewController: UIViewController {
     
     func navBar() {
         // Create a logout button with a custom title
-        let logoutButton = UIBarButtonItem(title: "Exit", style: .plain, target: self, action: #selector(showConfirmationDialog))
+        let logoutButton = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(showConfirmationDialog))
         // Set the title color for the logout button
         logoutButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], for: .normal)
         // Set the logout button as the right bar button item
@@ -182,7 +182,6 @@ class CategoryViewController: UIViewController {
             let fetchedCategories = try managedObjectContext.fetch(fetchRequest)
             if let categoryObject = fetchedCategories.first {
                 managedObjectContext.delete(categoryObject)
-                
                 do {
                     try managedObjectContext.save()
                     cardData.remove(at: indexPath.row)

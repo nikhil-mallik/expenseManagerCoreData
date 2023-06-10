@@ -63,6 +63,15 @@ class EditCategoryViewController: UIViewController {
         imageViewOutlet.layer.cornerRadius = min(imageViewOutlet.frame.size.width, imageViewOutlet.frame.size.height) / 2
         imageViewOutlet.layer.masksToBounds = true
         navigationController?.navigationBar.tintColor = .black
+        cornerRadius()
+    }
+
+    
+    func cornerRadius() {
+        CornerRadiusHelper.applyCornerRadius(uploadImageOutlet)
+        CornerRadiusHelper.applyCornerRadius(budgetOutlet)
+        CornerRadiusHelper.applyCornerRadius(updateBtnOutlet)
+      
     }
     
     // MARK: Actions

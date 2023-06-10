@@ -29,9 +29,10 @@ class ParticularExpenseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        expAmtOutlet.keyboardType = .numberPad
+        cornerRadius()
         tableView.dataSource = self
         tableView.delegate = self
+      
         imagePickerHelper = ImagePickerHelper()
         navigationController?.navigationBar.tintColor = UIColor.black
         refreshControl.addTarget(self, action: #selector(refreshExpenses), for: .valueChanged)
@@ -95,6 +96,8 @@ class ParticularExpenseViewController: UIViewController {
             }
         }
     }
+    
+    
 
     @IBAction func addBtnAction(_ sender: Any) {
         guard let categoryDocumentId = categoryDocumentId,
@@ -242,7 +245,13 @@ class ParticularExpenseViewController: UIViewController {
             print("Error fetching expense: \(error.localizedDescription)")
         }
     }
- 
+    func cornerRadius() {
+        CornerRadiusHelper.applyCornerRadius(expAmtOutlet )
+        CornerRadiusHelper.applyCornerRadius(imageUploadBtnOutlet )
+        CornerRadiusHelper.applyCornerRadius(addBtnOutlet )
+        CornerRadiusHelper.applyCornerRadius(descOutlet)
+        CornerRadiusHelper.applyCornerRadius(ViewImage)
+    }
     func updateCategoryTotalExpenseAmount(categoryDocumentId: String, totalExpense: Int) {
         let fetchRequest: NSFetchRequest<CategoryEntity> = CategoryEntity.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "catId == %@", categoryDocumentId)
