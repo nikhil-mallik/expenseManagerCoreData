@@ -94,3 +94,4 @@ class ImagePickerHelper: NSObject, UIImagePickerControllerDelegate, UINavigation
         imagePicker?.dismiss(animated: true, completion: nil)
     }
 }
+

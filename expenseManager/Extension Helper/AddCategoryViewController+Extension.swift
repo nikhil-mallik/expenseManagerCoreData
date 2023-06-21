@@ -10,12 +10,16 @@ import UIKit
 
 extension AddCategoryViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        // Handle the selected image
+        if let selectedImage = info[.originalImage] as? UIImage {
+            // Handle the selected image here
+            self.pickedImage = selectedImage
+            self.viewImage.image = selectedImage
+        }
+        
         picker.dismiss(animated: true, completion: nil)
     }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        // Handle cancellation
         picker.dismiss(animated: true, completion: nil)
     }
 }
-

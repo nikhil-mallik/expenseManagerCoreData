@@ -109,7 +109,10 @@ class EditExpenseViewController: UIViewController {
     // MARK: IBActions
     
     @IBAction func uploadImageAction(_ sender: Any) {
-        presentImagePicker() // Display the image picker to choose an image
+        imagePickerHelper = ImagePickerHelper()
+        imagePickerHelper?.presentImagePicker(in: self) { [weak self] selectedImage in
+            self?.imageViewOutlet.image = selectedImage
+        }
     }
     
     @IBAction func updateBtnAction(_ sender: Any) {

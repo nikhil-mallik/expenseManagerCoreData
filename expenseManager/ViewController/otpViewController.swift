@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class otpViewController: UIViewController, UITextFieldDelegate {
     
@@ -26,7 +27,8 @@ class otpViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = UIColor.black
         // Set the delegate for the OTP text field
-        OtpCodeOutlet.delegate = self        
+        OtpCodeOutlet.delegate = self
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -37,6 +39,8 @@ class otpViewController: UIViewController, UITextFieldDelegate {
         super.viewWillDisappear(animated)
         KeyboardHelper.stopObservingKeyboardNotifications(for: self)
     }
+    
+   
     
     func resendOTP(phoneNumber: String, completion: @escaping (Bool, String?) -> Void) {
         // Simulating the resend OTP logic with a delay of 2 seconds
@@ -74,8 +78,7 @@ class otpViewController: UIViewController, UITextFieldDelegate {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let categoryVC = storyboard.instantiateViewController(withIdentifier: "CategoryViewController") as! CategoryViewController
                     categoryVC.modalPresentationStyle = .fullScreen
-                   
-                    categoryVC.userId = self?.userId // Pass the userId to CategoryViewController
+                    categoryVC.title = "Expense Manager"
                     self?.navigationController?.pushViewController(categoryVC, animated: true)
                 }
             }

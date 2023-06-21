@@ -16,24 +16,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let window = UIWindow(windowScene: windowScene)
+        
+        // Assign the window to the class-level property
+        self.window = UIWindow(windowScene: windowScene)
         
         if Auth.auth().currentUser == nil {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "phoneViewController") as! phoneViewController
             vc.title = "Sign In"
             let navVC = UINavigationController(rootViewController: vc)
-            window.rootViewController = navVC
-        }
-        else {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "CategoryViewController") as! CategoryViewController
-            vc.title = "Expense Manager"
-            let navVC = UINavigationController(rootViewController: vc)
-            window.rootViewController = navVC
+            self.window?.rootViewController = navVC
+        } else {
+            let categoryViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CategoryViewController") as! CategoryViewController
+            categoryViewController.title = "Expense Manager"
+            let navVC = UINavigationController(rootViewController: categoryViewController)
+            self.window?.rootViewController = navVC
         }
         
-        window.makeKeyAndVisible()
-        self.window = window
+        self.window?.makeKeyAndVisible()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -66,7 +65,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-    
-    
 }
-

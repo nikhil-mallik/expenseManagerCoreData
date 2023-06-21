@@ -26,12 +26,25 @@ class CategoryViewController: UIViewController {
         navBar()
         setupUI()
         setupManagedObjectContext()
-        
+        fetchCurrentUser()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchCategories()
     }
+    
+    // MARK: Firebase Authentication
+        func fetchCurrentUser() {
+            if let currentUser = Auth.auth().currentUser {
+                let userId = currentUser.uid
+                self.userId = userId
+                print("Current user ID: \(userId)")
+            } else {
+                print("No current user found.")
+            }
+        }
+    
     
     // MARK: Managed Object Context
     
@@ -71,15 +84,35 @@ class CategoryViewController: UIViewController {
         }
     }
     
-    func logoutButton() {
+    @objc func logoutButton() {
         do {
             try Auth.auth().signOut()
-            navigationController?.popToRootViewController(animated: true)
+            
+            // Get the navigation controller
+            if let navController = self.navigationController {
+                // Check if the root view controller is already the phoneViewController
+                if let phoneViewController = navController.viewControllers.first as? phoneViewController {
+                    // Pop back to the phoneViewController
+                    navController.popToViewController(phoneViewController, animated: true)
+                } else {
+                    // Instantiate the phoneViewController
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let phoneViewController = storyboard.instantiateViewController(withIdentifier: "phoneViewController") as! phoneViewController
+                    phoneViewController.title = "Sign In"
+                    
+                    // Set the phoneViewController as the root view controller
+                    navController.setViewControllers([phoneViewController], animated: true)
+                }
+            }
+            
         } catch {
             AlertHelper.showAlert(withTitle: "Alert", message: "Error logging out: \(error.localizedDescription)", from: self)
         }
     }
-    
+
+
+
+
     func fetchCategories() {
         guard let managedObjectContext = managedObjectContext else {
             print("Managed object context is nil")
@@ -204,6 +237,7 @@ class CategoryViewController: UIViewController {
             return
         }
         addCategoryViewController.userId = self.userId
+        print("faltu \(userId)")
         navigationController?.pushViewController(addCategoryViewController, animated: true)
     }
     

@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>71697219329-9g65e734lqt6etbv6v25dg8pp1c3q6l3.apps.googleusercontent.com</string>
+	<string>540211686450-frhvtornutfdgagkvi3aqbutoopn893i.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.71697219329-9g65e734lqt6etbv6v25dg8pp1c3q6l3</string>
+	<string>com.googleusercontent.apps.540211686450-frhvtornutfdgagkvi3aqbutoopn893i</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDm2rmRWvL8VUcdDDiJms6qq_RQGHedgiQ</string>
+	<string>AIzaSyAgV5SZ19X7iJ0OjXq77F3YZ2Hz48I_c5E</string>
 	<key>GCM_SENDER_ID</key>
-	<string>71697219329</string>
+	<string>540211686450</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.nikhil.expenseManager</string>
 	<key>PROJECT_ID</key>
-	<string>expense-91e86</string>
+	<string>expensemanager-4e3e0</string>
 	<key>STORAGE_BUCKET</key>
-	<string>expense-91e86.appspot.com</string>
+	<string>expensemanager-4e3e0.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:71697219329:ios:03bd83296bc689f5c12500</string>
-	<key>DATABASE_URL</key>
-	<string>https://expense-91e86-default-rtdb.firebaseio.com</string>
+	<string>1:540211686450:ios:acd2f4c2eb0dc536d4a02b</string>
 </dict>
 </plist>
