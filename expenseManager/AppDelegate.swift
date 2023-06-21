@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Schedule the uploadDataToFirestore function to execute at 4:30 PM
         var dateComponents = DateComponents()
-        dateComponents.hour = 16 // 4 PM
-        dateComponents.minute = 49 // 30 minutes
+        dateComponents.hour = 11 // 10 AM
+        dateComponents.minute = 30 // 2 minutes
         let uploadDate = Calendar.current.nextDate(after: Date(), matching: dateComponents, matchingPolicy: .nextTime) ?? Date()
         
         let uploadTimer = Timer(fire: uploadDate, interval: 86400, repeats: true) { _ in
@@ -68,6 +68,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    // Function to resize and compress the image
+    func resizeAndCompressImage(image: UIImage, maxSizeKB: Int, completion: @escaping (Data?) -> Void) {
+        let maxBytes = maxSizeKB * 1024
+        var compression: CGFloat = 1.0
+        var imageData = image.jpegData(compressionQuality: compression)
+        
+        while let data = imageData, data.count > maxBytes, compression > 0.1 {
+            compression -= 0.1
+            imageData = image.jpegData(compressionQuality: compression)
+        }
+        
+        completion(imageData)
+    }
+    
     // MARK: - Firestore Upload and Fetch Functions
     
     func uploadDataToFirestore() {
@@ -83,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let categoryDocRef = Firestore.firestore().collection("Category").document(catId)
             
-            let categoryData: [String: Any] = [
+            var categoryData: [String: Any] = [
                 "budget": category.budget,
                 "catId": catId,
                 "imageURL": category.imageURL ?? "",
@@ -94,31 +109,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // Include other properties as required
             ]
             
-            categoryDocRef.setData(categoryData) { error in
-                if let error = error {
-                    print("Error uploading category data: \(error.localizedDescription)")
-                } else {
-                    print("Category data uploaded successfully!")
-                }
-            }
-            
-            // Upload the image to Firebase Storage
-            if let imageData = category.imageURL {
-                let storageRef = Storage.storage().reference().child("categoryImages/\(catId).jpg")
-                let metadata = StorageMetadata()
-                metadata.contentType = "image/jpeg"
-                
-                storageRef.putData(imageData, metadata: metadata) { metadata, error in
-                    if let error = error {
-                        print("Error uploading category image: \(error.localizedDescription)")
-                    } else {
-                        // Get the download URL of the uploaded image
-                        storageRef.downloadURL { url, error in
-                            if let imageURL = url?.absoluteString {
-                                // Update the "imageURL" property with the download URL
-                                categoryDocRef.updateData(["imageURL": imageURL])
+            // Check if category has an image
+            if let imageData = category.imageURL, let image = UIImage(data: imageData) {
+                resizeAndCompressImage(image: image, maxSizeKB: 1024) { [weak self] resizedImageData in
+                    if let resizedImageData = resizedImageData {
+                        // Check if the resized image data is within the size limit
+                        if resizedImageData.count > 1048487 {
+                            print("Resized image data exceeds the size limit.")
+                            return
+                        }
+                        
+                        // Update the categoryData with the resized image data
+                        categoryData["imageURL"] = resizedImageData
+                        
+                        // Upload the category data to Firestore
+                        categoryDocRef.setData(categoryData) { error in
+                            if let error = error {
+                                print("Error uploading category data: \(error.localizedDescription)")
+                            } else {
+                                print("Category data uploaded successfully!")
                             }
                         }
+                        
+                        // Upload the resized image to Firebase Storage
+                        let storageRef = Storage.storage().reference().child("categoryImages/\(catId).jpg")
+                        let metadata = StorageMetadata()
+                        metadata.contentType = "image/jpeg"
+                        
+                        storageRef.putData(resizedImageData, metadata: metadata) { metadata, error in
+                            if let error = error {
+                                print("Error uploading category image: \(error.localizedDescription)")
+                            } else {
+                                // Get the download URL of the uploaded image
+                                storageRef.downloadURL { url, error in
+                                    if let imageURL = url?.absoluteString {
+                                        // Update the "imageURL" property with the download URL
+                                        categoryDocRef.updateData(["imageURL": imageURL])
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        // Failed to resize or compress the image
+                        // Handle the error or notify the user
+                    }
+                }
+            } else {
+                // Category does not have an image
+                // Upload the category data to Firestore without an image
+                categoryDocRef.setData(categoryData) { error in
+                    if let error = error {
+                        print("Error uploading category data: \(error.localizedDescription)")
+                    } else {
+                        print("Category data uploaded successfully!")
                     }
                 }
             }
@@ -134,7 +177,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let expenseDocRef = Firestore.firestore().collection("Expense").document(expId)
             
-            let expenseData: [String: Any] = [
+            var expenseData: [String: Any] = [
                 "catId": expense.catId ?? "",
                 "desc": expense.desc ?? "",
                 "expAmt": expense.expAmt,
@@ -151,23 +194,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             
-            // Upload the image to Firebase Storage
-            if let imageData = expense.imageURL {
-                let storageRef = Storage.storage().reference().child("expenseImages/\(expId).jpg")
-                let metadata = StorageMetadata()
-                metadata.contentType = "image/jpeg"
-                
-                storageRef.putData(imageData, metadata: metadata) { metadata, error in
-                    if let error = error {
-                        print("Error uploading expense image: \(error.localizedDescription)")
-                    } else {
-                        // Get the download URL of the uploaded image
-                        storageRef.downloadURL { url, error in
-                            if let imageURL = url?.absoluteString {
-                                // Update the "imageURL" property with the download URL
-                                expenseDocRef.updateData(["imageURL": imageURL])
+            // Check if expense has an image
+            if let imageData = expense.imageURL, let image = UIImage(data: imageData) {
+                resizeAndCompressImage(image: image, maxSizeKB: 1024) { [weak self] resizedImageData in
+                    if let resizedImageData = resizedImageData {
+                        // Check if the resized image data is within the size limit
+                        if resizedImageData.count > 1048487 {
+                            print("Resized image data exceeds the size limit.")
+                            return
+                        }
+                        
+                        // Update the expenseData with the resized image data
+                        expenseData["imageURL"] = resizedImageData
+                        
+                        // Upload the expense data to Firestore
+                        expenseDocRef.setData(expenseData) { error in
+                            if let error = error {
+                                print("Error uploading expense data: \(error.localizedDescription)")
+                            } else {
+                                print("Expense data uploaded successfully!")
                             }
                         }
+                        
+                        // Upload the resized image to Firebase Storage
+                        let storageRef = Storage.storage().reference().child("expenseImages/\(expId).jpg")
+                        let metadata = StorageMetadata()
+                        metadata.contentType = "image/jpeg"
+                        
+                        storageRef.putData(resizedImageData, metadata: metadata) { metadata, error in
+                            if let error = error {
+                                print("Error uploading expense image: \(error.localizedDescription)")
+                            } else {
+                                // Get the download URL of the uploaded image
+                                storageRef.downloadURL { url, error in
+                                    if let imageURL = url?.absoluteString {
+                                        // Update the "imageURL" property with the download URL
+                                        expenseDocRef.updateData(["imageURL": imageURL])
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        // Failed to resize or compress the image
+                        // Handle the error or notify the user
+                    }
+                }
+            } else {
+                // Expense does not have an image
+                // Upload the expense data to Firestore without an image
+                expenseDocRef.setData(expenseData) { error in
+                    if let error = error {
+                        print("Error uploading expense data: \(error.localizedDescription)")
+                    } else {
+                        print("Expense data uploaded successfully!")
                     }
                 }
             }

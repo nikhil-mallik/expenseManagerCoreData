@@ -19,8 +19,8 @@ class AddCategoryViewController: UIViewController {
     @IBOutlet weak var addDataOutlet: UIButton!
     
     // MARK: Properties
-    
-    private var pickedImage: UIImage?
+    var imagePickerHelper: ImagePickerHelper?
+    var pickedImage: UIImage?
     private var managedObjectContext: NSManagedObjectContext!
     var userId: String?
     
@@ -64,8 +64,8 @@ class AddCategoryViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func uploadImageAction(_ sender: Any) {
-        let imagePickerHelper = ImagePickerHelper()
-        imagePickerHelper.presentImagePicker(in: self) { [weak self] selectedImage in
+        imagePickerHelper = ImagePickerHelper()
+        imagePickerHelper?.presentImagePicker(in: self) { [weak self] selectedImage in
             if let image = selectedImage {
                 self?.pickedImage = image
                 self?.viewImage.image = selectedImage
@@ -88,8 +88,6 @@ class AddCategoryViewController: UIViewController {
             showAlert(withTitle: "Error", message: "Please upload an image.")
             return
         }
-        
-        LoaderViewHelper.showLoader(on: view)
         saveCategory(withTitle: title, amount: amount, image: selectedImage)
     }
     
@@ -99,7 +97,7 @@ class AddCategoryViewController: UIViewController {
         guard let userId = userId else {
             return
         }
-        
+        print(userId)
         let category = CategoryEntity(context: managedObjectContext)
         category.catId = UUID().uuidString
         category.title = title
@@ -113,15 +111,18 @@ class AddCategoryViewController: UIViewController {
         }
         
         do {
+            print(userId)
             try managedObjectContext.save()
             let storeURL = managedObjectContext.persistentStoreCoordinator?.persistentStores.first?.url
             print("Database location: \(storeURL?.path ?? "Unknown")")
-            
+//            AlertHelper.showAlert(withTitle: "Success", message: "Category added successfully.", from: self) { [weak self] in
+//                self?.clearFields()
+//            }
             showAlert(withTitle: "Success", message: "Category added successfully.") { [weak self] in
                 self?.clearFields()
             }
         } catch {
-            showAlert(withTitle: "Error", message: "Failed to save category. Please try again.")
+            AlertHelper.showAlert(withTitle: "Error", message: "Failed to save category. Please try again.", from: self)
         }
     }
     

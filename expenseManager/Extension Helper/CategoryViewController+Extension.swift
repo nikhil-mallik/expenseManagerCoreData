@@ -14,6 +14,8 @@ extension CategoryViewController: UITableViewDataSource {
         return cardData.count
     }
     
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
         let card = cardData[indexPath.row]
@@ -33,7 +35,7 @@ extension CategoryViewController: UITableViewDataSource {
             // Use a placeholder image if the data is invalid
             cell.iconImageView.image = ImageHelper.generatePlaceholderImage(text: card.titleOutlet)
         }
-        
+
         cell.onDetail = { [weak self] in
             self?.detailAction(indexPath: indexPath)
         }
@@ -43,6 +45,21 @@ extension CategoryViewController: UITableViewDataSource {
 
 
 extension CategoryViewController: UITableViewDelegate {
+    
+//    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+//        print("Tap ")
+//        let card = cardData[indexPath.row]
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        guard let particularExpenseViewController = storyboard.instantiateViewController(withIdentifier: "ParticularExpenseViewController") as? ParticularExpenseViewController else {
+//            return
+//        }
+//        particularExpenseViewController.title = card.titleOutlet
+//        let categoryId = card.documentId
+//        particularExpenseViewController.categoryDocumentId = categoryId
+//        particularExpenseViewController.budgetAmount = card.leftAmtOutlet
+//        navigationController?.pushViewController(particularExpenseViewController, animated: true)
+//    }
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
