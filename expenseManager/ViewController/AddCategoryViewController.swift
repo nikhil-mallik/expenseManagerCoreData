@@ -75,17 +75,15 @@ class AddCategoryViewController: UIViewController {
     
     @IBAction func addDataAction(_ sender: Any) {
         guard let title = titleOutlet.text, !title.isEmpty else {
-            showAlert(withTitle: "Error", message: "Please enter a title.")
+            AlertHelper.showAlert(withTitle: "Error", message: "Please enter a title.", from: self)
             return
         }
-        
         guard let amountString = amountOutlet.text, !amountString.isEmpty, let amount = Int(amountString) else {
-            showAlert(withTitle: "Error", message: "Please enter a valid amount.")
+            AlertHelper.showAlert(withTitle: "Error", message: "Please enter a valid amount.", from: self)
             return
         }
-        
         guard let selectedImage = pickedImage else {
-            showAlert(withTitle: "Error", message: "Please upload an image.")
+            AlertHelper.showAlert(withTitle: "Error", message: "Please upload an image.", from: self)
             return
         }
         saveCategory(withTitle: title, amount: amount, image: selectedImage)
@@ -115,9 +113,6 @@ class AddCategoryViewController: UIViewController {
             try managedObjectContext.save()
             let storeURL = managedObjectContext.persistentStoreCoordinator?.persistentStores.first?.url
             print("Database location: \(storeURL?.path ?? "Unknown")")
-//            AlertHelper.showAlert(withTitle: "Success", message: "Category added successfully.", from: self) { [weak self] in
-//                self?.clearFields()
-//            }
             showAlert(withTitle: "Success", message: "Category added successfully.") { [weak self] in
                 self?.clearFields()
             }
@@ -128,7 +123,8 @@ class AddCategoryViewController: UIViewController {
     
     // MARK: Helper Methods
     
-    private func showAlert(withTitle title: String, message: String, completion: (() -> Void)? = nil) {
+     func showAlert(withTitle title: String, message: String, completion: (() -> Void)? = nil) {
+    
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in

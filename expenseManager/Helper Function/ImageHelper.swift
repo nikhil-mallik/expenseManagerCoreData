@@ -35,8 +35,11 @@ class ImageHelper {
 class ImagePickerHelper: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private var imagePicker: UIImagePickerController?
     private var viewController: UIViewController?
-    private var completionHandler: ((UIImage?) -> Void)?
+     var completionHandler: ((UIImage?) -> Void)?
     
+    var isImagePickerPresented: Bool {
+            return imagePicker != nil && imagePicker?.presentingViewController != nil
+        }
     func presentImagePicker(in viewController: UIViewController, completion: @escaping (UIImage?) -> Void) {
         self.viewController = viewController
         self.completionHandler = completion

@@ -78,9 +78,6 @@ class EditExpenseViewController: UIViewController {
             print("Error fetching expense: \(error.localizedDescription)")
         }
     }
-   
-  
-   
 
     func cornerRadius() {
         CornerRadiusHelper.applyCornerRadius(expAmtOutlet )
