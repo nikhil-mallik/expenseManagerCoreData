@@ -14,8 +14,11 @@ class CategoryViewController: UIViewController {
     var managedObjectContext: NSManagedObjectContext?
     var categoryId: String?
     var selectedIndexPath: IndexPath?
-    var userId: String?
+    var userId: String!
     var titleLabel: UILabel? = nil
+    var currentUser: String!
+    var auth: AuthManager?
+    var navigationControllerStub: UINavigationController?
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -35,24 +38,24 @@ class CategoryViewController: UIViewController {
     }
     
     // MARK: Firebase Authentication
-        func fetchCurrentUser() {
-            if let currentUser = Auth.auth().currentUser {
-                let userId = currentUser.uid
-                self.userId = userId
-                print("Current user ID: \(userId)")
-            } else {
-                print("No current user found.")
-            }
+    func fetchCurrentUser() {
+        if let currentUser = Auth.auth().currentUser {
+            let userId = currentUser.uid
+            self.userId = userId
+            print("Current user ID: \(userId)")
+        } else {
+            self.userId = nil
+            print("No current user found.")
         }
-    
+    }
     
     // MARK: Managed Object Context
-    
     private func setupManagedObjectContext() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedObjectContext = appDelegate.persistentContainer.viewContext
         if managedObjectContext == nil { return }
     }
+    
     func setupUI() {
         // Hide the default back button
         navigationItem.hidesBackButton = true
@@ -85,34 +88,30 @@ class CategoryViewController: UIViewController {
     }
     
     @objc func logoutButton() {
-        do {
-            try Auth.auth().signOut()
-            
-            // Get the navigation controller
-            if let navController = self.navigationController {
-                // Check if the root view controller is already the phoneViewController
-                if let phoneViewController = navController.viewControllers.first as? phoneViewController {
-                    // Pop back to the phoneViewController
-                    navController.popToViewController(phoneViewController, animated: true)
-                } else {
-                    // Instantiate the phoneViewController
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let phoneViewController = storyboard.instantiateViewController(withIdentifier: "phoneViewController") as! phoneViewController
-                    phoneViewController.title = "Sign In"
-                    
-                    // Set the phoneViewController as the root view controller
-                    navController.setViewControllers([phoneViewController], animated: true)
+        AuthManager.shared.signOut { [weak self] success in
+            if success {
+                // Get the navigation controller
+                if let navController = self?.navigationController {
+                    // Check if the root view controller is already the phoneViewController
+                    if let phoneViewController = navController.viewControllers.first as? phoneViewController {
+                        // Pop back to the phoneViewController
+                        navController.popToViewController(phoneViewController, animated: true)
+                    } else {
+                        // Instantiate the phoneViewController
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let phoneViewController = storyboard.instantiateViewController(withIdentifier: "phoneViewController") as! phoneViewController
+                        phoneViewController.title = "Sign In"
+                        
+                        // Set the phoneViewController as the root view controller
+                        navController.setViewControllers([phoneViewController], animated: true)
+                    }
                 }
+            } else {
+                AlertHelper.showAlert(withTitle: "Alert", message: "Error logging out", from: self!)
             }
-            
-        } catch {
-            AlertHelper.showAlert(withTitle: "Alert", message: "Error logging out: \(error.localizedDescription)", from: self)
         }
     }
-
-
-
-
+    
     func fetchCategories() {
         guard let managedObjectContext = managedObjectContext else {
             print("Managed object context is nil")
@@ -190,6 +189,10 @@ class CategoryViewController: UIViewController {
     }
     
     func deleteCategory(at indexPath: IndexPath) {
+        guard indexPath.row < cardData.count else {
+            // Invalid index, handle the error gracefully
+            return
+        }
         let category = cardData[indexPath.row]
         
         ConfirmationDialogHelper.showConfirmationDialog(on: self,
@@ -203,21 +206,31 @@ class CategoryViewController: UIViewController {
     }
     
     func handleDeleteAction(at indexPath: IndexPath) {
+        guard indexPath.row < cardData.count else {
+            // Invalid index, handle the error gracefully
+            return
+        }
+        
         let category = cardData[indexPath.row]
+        
         guard let managedObjectContext = managedObjectContext else {
             print("Managed object context is nil")
             return
         }
+        
         do {
             let fetchRequest: NSFetchRequest<CategoryEntity> = CategoryEntity.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "catId == %@", category.documentId)
             
             let fetchedCategories = try managedObjectContext.fetch(fetchRequest)
+            
             if let categoryObject = fetchedCategories.first {
+                cardData.remove(at: indexPath.row) // Remove category from cardData array
+                
                 managedObjectContext.delete(categoryObject)
+                
                 do {
                     try managedObjectContext.save()
-                    cardData.remove(at: indexPath.row)
                     tableShowOutlet.deleteRows(at: [indexPath], with: .automatic)
                     noRecordFound.isHidden = !cardData.isEmpty
                 } catch {
@@ -237,7 +250,6 @@ class CategoryViewController: UIViewController {
             return
         }
         addCategoryViewController.userId = self.userId
-        print("faltu \(userId)")
         navigationController?.pushViewController(addCategoryViewController, animated: true)
     }
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D2DDB372A486B8700DD5AF0 /* EditCategoryViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2DDB362A486B8700DD5AF0 /* EditCategoryViewControllerTests.swift */; };
 		7D3401272A41594E006DB9B7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D3401262A41594E006DB9B7 /* GoogleService-Info.plist */; };
 		7D4909972A20CC4B0092E185 /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4909962A20CC4B0092E185 /* AddCategoryViewController.swift */; };
 		7D49099D2A21BAD80092E185 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D49099C2A21BAD80092E185 /* CategoryViewController.swift */; };
@@ -15,8 +16,6 @@
 		7D4CE7E62A1F7739007972C7 /* otpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4CE7E52A1F7739007972C7 /* otpViewController.swift */; };
 		7D4CE7EB2A1F7781007972C7 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D4CE7EA2A1F7781007972C7 /* images.xcassets */; };
 		7D4CE7ED2A1F7E03007972C7 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4CE7EC2A1F7E03007972C7 /* AuthManager.swift */; };
-		7D550EC72A43186000A597EC /* expenseManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D550EC62A43186000A597EC /* expenseManagerUITests.swift */; };
-		7D550EC92A43186000A597EC /* expenseManagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D550EC82A43186000A597EC /* expenseManagerUITestsLaunchTests.swift */; };
 		7D550ED62A4318BB00A597EC /* expenseManagerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D550ED52A4318BB00A597EC /* expenseManagerUnitTests.swift */; };
 		7D5CAEF92A2755E700B08204 /* EditCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5CAEF82A2755E700B08204 /* EditCategoryViewController.swift */; };
 		7D8E91522A305AC70092DB61 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E91512A305AC70092DB61 /* KeyboardHelper.swift */; };
@@ -34,6 +33,10 @@
 		7D9B85DD2A25CB7A0007DA77 /* ParticularExpenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9B85DC2A25CB7A0007DA77 /* ParticularExpenseTableViewCell.swift */; };
 		7D9B85DF2A25CCB60007DA77 /* ParticularExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9B85DE2A25CCB60007DA77 /* ParticularExpenseViewController.swift */; };
 		7D9EE98A2A2091D900C1440A /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9EE9892A2091D900C1440A /* CustomTableViewCell.swift */; };
+		7DA8C23E2A4EA4FB00EDB305 /* editCategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8C23D2A4EA4FB00EDB305 /* editCategoryTests.swift */; };
+		7DC5648C2A46CAA0003D24C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D49099E2A21C72F0092E185 /* Main.storyboard */; };
+		7DC5648D2A46CAA1003D24C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D49099E2A21C72F0092E185 /* Main.storyboard */; };
+		7DC5648F2A4820A2003D24C6 /* CategoryViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5648E2A4820A2003D24C6 /* CategoryViewControllerTest.swift */; };
 		7DE14EB02A1F7555002E29E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE14EAF2A1F7555002E29E1 /* AppDelegate.swift */; };
 		7DE14EB22A1F7555002E29E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE14EB12A1F7555002E29E1 /* SceneDelegate.swift */; };
 		7DE14EB42A1F7555002E29E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE14EB32A1F7555002E29E1 /* ViewController.swift */; };
@@ -61,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7D2DDB362A486B8700DD5AF0 /* EditCategoryViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryViewControllerTests.swift; sourceTree = "<group>"; };
 		7D3401262A41594E006DB9B7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7D4909962A20CC4B0092E185 /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
 		7D49099C2A21BAD80092E185 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -70,8 +74,6 @@
 		7D4CE7EA2A1F7781007972C7 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		7D4CE7EC2A1F7E03007972C7 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		7D550EC42A43186000A597EC /* expenseManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = expenseManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D550EC62A43186000A597EC /* expenseManagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = expenseManagerUITests.swift; sourceTree = "<group>"; };
-		7D550EC82A43186000A597EC /* expenseManagerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = expenseManagerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7D550ED32A4318BB00A597EC /* expenseManagerUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = expenseManagerUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D550ED52A4318BB00A597EC /* expenseManagerUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = expenseManagerUnitTests.swift; sourceTree = "<group>"; };
 		7D5CAEF82A2755E700B08204 /* EditCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,8 @@
 		7D9B85DC2A25CB7A0007DA77 /* ParticularExpenseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticularExpenseTableViewCell.swift; sourceTree = "<group>"; };
 		7D9B85DE2A25CCB60007DA77 /* ParticularExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticularExpenseViewController.swift; sourceTree = "<group>"; };
 		7D9EE9892A2091D900C1440A /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		7DA8C23D2A4EA4FB00EDB305 /* editCategoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editCategoryTests.swift; sourceTree = "<group>"; };
+		7DC5648E2A4820A2003D24C6 /* CategoryViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewControllerTest.swift; sourceTree = "<group>"; };
 		7DE14EAC2A1F7555002E29E1 /* expenseManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = expenseManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE14EAF2A1F7555002E29E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7DE14EB12A1F7555002E29E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -163,19 +167,13 @@
 			path = Utlis;
 			sourceTree = "<group>";
 		};
-		7D550EC52A43186000A597EC /* expenseManagerUITests */ = {
-			isa = PBXGroup;
-			children = (
-				7D550EC62A43186000A597EC /* expenseManagerUITests.swift */,
-				7D550EC82A43186000A597EC /* expenseManagerUITestsLaunchTests.swift */,
-			);
-			path = expenseManagerUITests;
-			sourceTree = "<group>";
-		};
 		7D550ED42A4318BB00A597EC /* expenseManagerUnitTests */ = {
 			isa = PBXGroup;
 			children = (
 				7D550ED52A4318BB00A597EC /* expenseManagerUnitTests.swift */,
+				7DC5648E2A4820A2003D24C6 /* CategoryViewControllerTest.swift */,
+				7D2DDB362A486B8700DD5AF0 /* EditCategoryViewControllerTests.swift */,
+				7DA8C23D2A4EA4FB00EDB305 /* editCategoryTests.swift */,
 			);
 			path = expenseManagerUnitTests;
 			sourceTree = "<group>";
@@ -208,7 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				7DE14EAE2A1F7555002E29E1 /* expenseManager */,
-				7D550EC52A43186000A597EC /* expenseManagerUITests */,
 				7D550ED42A4318BB00A597EC /* expenseManagerUnitTests */,
 				7DE14EAD2A1F7555002E29E1 /* Products */,
 				ADB2E5551E8518690BD9B350 /* Pods */,
@@ -361,6 +358,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DC5648C2A46CAA0003D24C6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +366,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DC5648D2A46CAA1003D24C6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,8 +431,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D550EC72A43186000A597EC /* expenseManagerUITests.swift in Sources */,
-				7D550EC92A43186000A597EC /* expenseManagerUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +438,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D2DDB372A486B8700DD5AF0 /* EditCategoryViewControllerTests.swift in Sources */,
+				7DA8C23E2A4EA4FB00EDB305 /* editCategoryTests.swift in Sources */,
+				7DC5648F2A4820A2003D24C6 /* CategoryViewControllerTest.swift in Sources */,
 				7D550ED62A4318BB00A597EC /* expenseManagerUnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,6 +544,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nikhil.expenseManagerUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -561,6 +562,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nikhil.expenseManagerUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -695,7 +697,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = expenseManager/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -704,6 +706,73 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"FBLPromises\"",
+					"-framework",
+					"\"FirebaseAppCheckInterop\"",
+					"-framework",
+					"\"FirebaseAuth\"",
+					"-framework",
+					"\"FirebaseAuthInterop\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreExtension\"",
+					"-framework",
+					"\"FirebaseCoreInternal\"",
+					"-framework",
+					"\"FirebaseDatabase\"",
+					"-framework",
+					"\"FirebaseFirestore\"",
+					"-framework",
+					"\"FirebaseStorage\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"absl\"",
+					"-framework",
+					"\"grpc\"",
+					"-framework",
+					"\"grpcpp\"",
+					"-framework",
+					"\"leveldb\"",
+					"-framework",
+					"\"nanopb\"",
+					"-framework",
+					"\"openssl_grpc\"",
+					"-weak_framework",
+					"\"Combine\"",
+					"-weak_framework",
+					"\"SwiftUI\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nikhil.expenseManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -723,7 +792,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = expenseManager/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -732,6 +801,73 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"FBLPromises\"",
+					"-framework",
+					"\"FirebaseAppCheckInterop\"",
+					"-framework",
+					"\"FirebaseAuth\"",
+					"-framework",
+					"\"FirebaseAuthInterop\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreExtension\"",
+					"-framework",
+					"\"FirebaseCoreInternal\"",
+					"-framework",
+					"\"FirebaseDatabase\"",
+					"-framework",
+					"\"FirebaseFirestore\"",
+					"-framework",
+					"\"FirebaseStorage\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"absl\"",
+					"-framework",
+					"\"grpc\"",
+					"-framework",
+					"\"grpcpp\"",
+					"-framework",
+					"\"leveldb\"",
+					"-framework",
+					"\"nanopb\"",
+					"-framework",
+					"\"openssl_grpc\"",
+					"-weak_framework",
+					"\"Combine\"",
+					"-weak_framework",
+					"\"SwiftUI\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nikhil.expenseManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -6,6 +6,7 @@
 //
 
 import FirebaseAuth
+
 import Foundation
 
 class AuthManager {
@@ -50,20 +51,24 @@ class AuthManager {
         }
     }
     // Resends the OTP to the stored phone number
-        public func resendOTP(completion: @escaping (Bool) -> Void) {
-            guard let phoneNumber = phoneNumber else {
-                completion(false)
-                return
-            }
-            
-            startAuth(phoneNumber: phoneNumber) { success in
-                completion(success)
-            }
+    public func resendOTP(completion: @escaping (Bool) -> Void) {
+        guard let phoneNumber = phoneNumber else {
+            completion(false)
+            return
         }
+        
+        startAuth(phoneNumber: phoneNumber) { success in
+            completion(success)
+        }
+    }
+    
+    // Signs out the current user
+    public func signOut(completion: @escaping (Bool) -> Void) {
+        do {
+            try auth.signOut()
+            completion(true)
+        } catch {
+            completion(false)
+        }
+    }
 }
-
-
-
-
-
-
