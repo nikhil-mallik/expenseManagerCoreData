@@ -18,11 +18,12 @@ class EditExpenseViewController: UIViewController {
     @IBOutlet weak var expAmtOutlet: UITextField!
     @IBOutlet weak var updateBtnOutlet: UIButton!
     @IBOutlet weak var descOutlet: UITextField!
+    @IBOutlet weak var addimageOutlet: UIButton!
     
     // MARK: Properties
     
     var imagePickerHelper: ImagePickerHelper?
-    var expense: ExpenseEntity? 
+    var expense: ExpenseEntity?
     var documentId: String?
     var newLimit: Int?
     var managedObjectContext: NSManagedObjectContext?
@@ -78,7 +79,7 @@ class EditExpenseViewController: UIViewController {
             print("Error fetching expense: \(error.localizedDescription)")
         }
     }
-
+    
     func cornerRadius() {
         CornerRadiusHelper.applyCornerRadius(expAmtOutlet )
         CornerRadiusHelper.applyCornerRadius(uploadImageOutlet )
@@ -105,12 +106,22 @@ class EditExpenseViewController: UIViewController {
     
     // MARK: IBActions
     
+    
+    @IBAction func addimageAction(_ sender: Any) {
+        imagePickerHelper = ImagePickerHelper()
+        imagePickerHelper?.presentImagePicker(in: self) { [weak self] selectedImage in
+            self?.imageViewOutlet.image = selectedImage
+        }
+    }
+    
+    
     @IBAction func uploadImageAction(_ sender: Any) {
         imagePickerHelper = ImagePickerHelper()
         imagePickerHelper?.presentImagePicker(in: self) { [weak self] selectedImage in
             self?.imageViewOutlet.image = selectedImage
         }
     }
+    
     
     @IBAction func updateBtnAction(_ sender: Any) {
         guard let expense = self.expense,

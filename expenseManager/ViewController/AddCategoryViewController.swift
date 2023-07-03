@@ -17,6 +17,7 @@ class AddCategoryViewController: UIViewController {
     @IBOutlet weak var titleOutlet: UITextField!
     @IBOutlet weak var amountOutlet: UITextField!
     @IBOutlet weak var addDataOutlet: UIButton!
+    @IBOutlet weak var addimageOutlet: UIButton!
     
     // MARK: Properties
     var imagePickerHelper: ImagePickerHelper?
@@ -50,6 +51,14 @@ class AddCategoryViewController: UIViewController {
         viewImage.contentMode = .scaleAspectFill
         viewImage.layer.cornerRadius = min(viewImage.frame.size.width, viewImage.frame.size.height) / 2
         viewImage.layer.masksToBounds = true
+        cornerRadius()
+    }
+    
+    func cornerRadius() {
+        CornerRadiusHelper.applyCornerRadius(uploadImage)
+        CornerRadiusHelper.applyCornerRadius(addimageOutlet)
+        CornerRadiusHelper.applyCornerRadius(addDataOutlet)
+      
     }
     
     // MARK: Managed Object Context
@@ -73,6 +82,18 @@ class AddCategoryViewController: UIViewController {
         }
     }
     
+    @IBAction func addImageAction(_ sender: Any) {
+        imagePickerHelper = ImagePickerHelper()
+        imagePickerHelper?.presentImagePicker(in: self) { [weak self] selectedImage in
+            if let image = selectedImage {
+                self?.pickedImage = image
+                self?.viewImage.image = selectedImage
+            }
+        }
+    }
+        
+        
+        
     @IBAction func addDataAction(_ sender: Any) {
         guard let title = titleOutlet.text, !title.isEmpty else {
             AlertHelper.showAlert(withTitle: "Error", message: "Please enter a title.", from: self)

@@ -18,6 +18,7 @@ class EditCategoryViewController: UIViewController {
     @IBOutlet weak var titleOutlet: UILabel!
     @IBOutlet weak var budgetOutlet: UITextField!
     @IBOutlet weak var updateBtnOutlet: UIButton!
+    @IBOutlet weak var addimageOutlet: UIButton!
     
     // MARK: Properties
     
@@ -65,18 +66,23 @@ class EditCategoryViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .black
         cornerRadius()
     }
-
     
     func cornerRadius() {
         CornerRadiusHelper.applyCornerRadius(uploadImageOutlet)
         CornerRadiusHelper.applyCornerRadius(budgetOutlet)
         CornerRadiusHelper.applyCornerRadius(updateBtnOutlet)
-      
     }
     
     // MARK: Actions
     
     @IBAction func uploadImageAction(_ sender: Any) {
+        imagePickerHelper = ImagePickerHelper()
+        imagePickerHelper?.presentImagePicker(in: self) { [weak self] selectedImage in
+            self?.imageViewOutlet.image = selectedImage
+        }
+    }
+    
+    @IBAction func addimageAction(_ sender: Any) {
         imagePickerHelper = ImagePickerHelper()
         imagePickerHelper?.presentImagePicker(in: self) { [weak self] selectedImage in
             self?.imageViewOutlet.image = selectedImage
