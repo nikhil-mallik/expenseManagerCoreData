@@ -77,7 +77,7 @@ class EditCategoryViewControllerTests: XCTestCase {
         let imagePickerHelper = ImagePickerHelper()
         viewController.imagePickerHelper = imagePickerHelper
         
-        viewController.uploadImageAction(self)
+        viewController.addimageAction(self)
         
         
         // Simulate selecting an image

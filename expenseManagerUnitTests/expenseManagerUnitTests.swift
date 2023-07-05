@@ -47,14 +47,14 @@ final class expenseManagerUnitTests: XCTestCase {
     func testUIElementsExistence() {
         XCTAssertNotNil(viewController.previewLabel)
         XCTAssertNotNil(viewController.viewImage)
-        XCTAssertNotNil(viewController.uploadImage)
+        XCTAssertNotNil(viewController.addimageOutlet)
         XCTAssertNotNil(viewController.titleOutlet)
         XCTAssertNotNil(viewController.amountOutlet)
         XCTAssertNotNil(viewController.addDataOutlet)
     }
     
     func testUploadImageAction() {
-        viewController.uploadImageAction(self)
+        viewController.addImageAction(self)
         
         // Simulate image selection and verify the result
         XCTAssertEqual(viewController.viewImage.image, viewController.pickedImage)

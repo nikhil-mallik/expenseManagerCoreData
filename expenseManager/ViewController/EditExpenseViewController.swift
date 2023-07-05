@@ -14,7 +14,6 @@ class EditExpenseViewController: UIViewController {
     
     @IBOutlet weak var imageViewOutlet: UIImageView!
     @IBOutlet weak var previewImageOutlet: UILabel!
-    @IBOutlet weak var uploadImageOutlet: UIButton!
     @IBOutlet weak var expAmtOutlet: UITextField!
     @IBOutlet weak var updateBtnOutlet: UIButton!
     @IBOutlet weak var descOutlet: UITextField!
@@ -82,7 +81,6 @@ class EditExpenseViewController: UIViewController {
     
     func cornerRadius() {
         CornerRadiusHelper.applyCornerRadius(expAmtOutlet )
-        CornerRadiusHelper.applyCornerRadius(uploadImageOutlet )
         CornerRadiusHelper.applyCornerRadius(updateBtnOutlet )
         CornerRadiusHelper.applyCornerRadius(descOutlet)
     }
@@ -113,15 +111,6 @@ class EditExpenseViewController: UIViewController {
             self?.imageViewOutlet.image = selectedImage
         }
     }
-    
-    
-    @IBAction func uploadImageAction(_ sender: Any) {
-        imagePickerHelper = ImagePickerHelper()
-        imagePickerHelper?.presentImagePicker(in: self) { [weak self] selectedImage in
-            self?.imageViewOutlet.image = selectedImage
-        }
-    }
-    
     
     @IBAction func updateBtnAction(_ sender: Any) {
         guard let expense = self.expense,

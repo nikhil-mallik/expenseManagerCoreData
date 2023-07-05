@@ -86,10 +86,10 @@ final class CategoryViewControllerTest: XCTestCase {
     func testFetchCategories_WhenManagedObjectContextIsValid_ShouldFetchData() {
         // Prepare test data in the mock managed object context
         let categoryEntity = CategoryEntity(context: mockManagedObjectContext)
-        categoryEntity.catId = "09F786A4-9A3E-4CFA-90FB-08588A524F5B"
-        categoryEntity.title = "can"
-        categoryEntity.totalAmount = 2000
-        categoryEntity.budget = 5000
+        categoryEntity.catId = "51AF5746-01C3-46D8-A74C-81882B476715"
+        categoryEntity.title = "Test"
+        categoryEntity.totalAmount = 1700
+        categoryEntity.budget = 15000
         
         try? mockManagedObjectContext.save()
         
@@ -106,10 +106,10 @@ final class CategoryViewControllerTest: XCTestCase {
         XCTAssertGreaterThan(sut.cardData.count, 0, "cardData should contain at least one element.")
         
         if let firstCategory = sut.cardData.first {
-            XCTAssertEqual(firstCategory.documentId, "09F786A4-9A3E-4CFA-90FB-08588A524F5B")
-            XCTAssertEqual(firstCategory.titleOutlet, "can")
-            XCTAssertEqual(firstCategory.expAmtOutlet, 2000)
-            XCTAssertEqual(firstCategory.leftAmtOutlet, 5000)
+            XCTAssertEqual(firstCategory.documentId, "51AF5746-01C3-46D8-A74C-81882B476715")
+            XCTAssertEqual(firstCategory.titleOutlet, "Test")
+            XCTAssertEqual(firstCategory.expAmtOutlet, 1700)
+            XCTAssertEqual(firstCategory.leftAmtOutlet, 15000)
         } else {
             XCTFail("cardData should contain at least one element.")
         }

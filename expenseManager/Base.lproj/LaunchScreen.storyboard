@@ -16,17 +16,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="QrY-6f-6ln">
-                                <rect key="frame" x="-150" y="-91" width="666" height="989"/>
-                            </imageView>
+                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZRX-7r-Uyf">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="QrY-6f-6ln">
+                                        <rect key="frame" x="16" y="16" width="361" height="820"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.64313725489999995" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="QrY-6f-6ln" secondAttribute="trailing" constant="16" id="6S1-gJ-GSj"/>
+                                    <constraint firstAttribute="bottom" secondItem="QrY-6f-6ln" secondAttribute="bottom" constant="16" id="Pg7-GR-OOW"/>
+                                    <constraint firstItem="QrY-6f-6ln" firstAttribute="top" secondItem="ZRX-7r-Uyf" secondAttribute="top" constant="16" id="X0e-SJ-cox"/>
+                                    <constraint firstItem="QrY-6f-6ln" firstAttribute="leading" secondItem="ZRX-7r-Uyf" secondAttribute="leading" constant="16" id="ZUb-yz-3c1"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="QrY-6f-6ln" secondAttribute="trailing" constant="-139" id="4Mr-9S-hX3"/>
-                            <constraint firstItem="QrY-6f-6ln" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-166" id="8me-9K-w05"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="QrY-6f-6ln" secondAttribute="bottom" constant="-80" id="Lql-g7-ZvV"/>
-                            <constraint firstItem="QrY-6f-6ln" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" constant="-150" id="ubH-S3-kga"/>
+                            <constraint firstAttribute="bottom" secondItem="ZRX-7r-Uyf" secondAttribute="bottom" id="IEy-58-Cjf"/>
+                            <constraint firstItem="ZRX-7r-Uyf" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="ROF-0q-Nqm"/>
+                            <constraint firstItem="ZRX-7r-Uyf" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Y4D-Qs-RUn"/>
+                            <constraint firstAttribute="trailing" secondItem="ZRX-7r-Uyf" secondAttribute="trailing" id="fnf-4A-Qfj"/>
                         </constraints>
                     </view>
                 </viewController>
