@@ -13,7 +13,6 @@ class AddCategoryViewController: UIViewController {
     
     @IBOutlet weak var previewLabel: UILabel!
     @IBOutlet weak var viewImage: UIImageView!
-    @IBOutlet weak var uploadImage: UIButton!
     @IBOutlet weak var titleOutlet: UITextField!
     @IBOutlet weak var amountOutlet: UITextField!
     @IBOutlet weak var addDataOutlet: UIButton!
@@ -55,7 +54,6 @@ class AddCategoryViewController: UIViewController {
     }
     
     func cornerRadius() {
-        CornerRadiusHelper.applyCornerRadius(uploadImage)
         CornerRadiusHelper.applyCornerRadius(addimageOutlet)
         CornerRadiusHelper.applyCornerRadius(addDataOutlet)
       
@@ -71,16 +69,7 @@ class AddCategoryViewController: UIViewController {
     }
     
     // MARK: Actions
-    
-    @IBAction func uploadImageAction(_ sender: Any) {
-        imagePickerHelper = ImagePickerHelper()
-        imagePickerHelper?.presentImagePicker(in: self) { [weak self] selectedImage in
-            if let image = selectedImage {
-                self?.pickedImage = image
-                self?.viewImage.image = selectedImage
-            }
-        }
-    }
+
     
     @IBAction func addImageAction(_ sender: Any) {
         imagePickerHelper = ImagePickerHelper()
