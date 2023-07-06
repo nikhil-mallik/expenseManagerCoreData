@@ -105,7 +105,6 @@ class AddCategoryViewController: UIViewController {
         guard let userId = userId else {
             return
         }
-        print(userId)
         let category = CategoryEntity(context: managedObjectContext)
         category.catId = UUID().uuidString
         category.title = title
@@ -119,7 +118,6 @@ class AddCategoryViewController: UIViewController {
         }
         
         do {
-            print(userId)
             try managedObjectContext.save()
             let storeURL = managedObjectContext.persistentStoreCoordinator?.persistentStores.first?.url
             print("Database location: \(storeURL?.path ?? "Unknown")")
