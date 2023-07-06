@@ -82,7 +82,6 @@ class EditCategoryViewController: UIViewController {
     
     @IBAction func updateBtnAction(_ sender: Any) {
         guard let imageData = imageViewOutlet.image?.jpegData(compressionQuality: 0.5) else {
-            print("Failed to get image data.")
             return
         }
         
@@ -107,7 +106,6 @@ class EditCategoryViewController: UIViewController {
         do {
             let fetchedCategories = try context.fetch(fetchRequest)
             guard let categoryToUpdate = fetchedCategories.first else {
-                print("Category not found.")
                 return
             }
             
@@ -115,17 +113,17 @@ class EditCategoryViewController: UIViewController {
             if let budgetText = budgetOutlet.text, let budget = Int64(budgetText) {
                 categoryToUpdate.budget = budget
             } else {
-                AlertHelper.showAlert(withTitle: "Alert", message: "Invalid budget value.", from: self)
+                AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.budgetInvalidMessage , from: self)
                 return
             }
             categoryToUpdate.imageURL = imageData
             
             try context.save()
-            AlertHelper.showAlert(withTitle: "Success", message: "Category updated successfully.", from: self) {
+            AlertHelper.showAlert(withTitle: Message.successTitle, message: Message.successUpdateMessage, from: self) {
                 self.navigationController?.popViewController(animated: true)
             }
         } catch {
-            AlertHelper.showAlert(withTitle: "Alert", message: "Error updating category: \(error.localizedDescription)", from: self)
+            AlertHelper.showAlert(withTitle: Message.alertTitle, message: "\(Message.errorDataUpdateMessage) \(error.localizedDescription)", from: self)
             
         }
     }

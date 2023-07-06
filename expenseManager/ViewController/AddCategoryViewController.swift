@@ -85,15 +85,15 @@ class AddCategoryViewController: UIViewController {
         
     @IBAction func addDataAction(_ sender: Any) {
         guard let title = titleOutlet.text, !title.isEmpty else {
-            AlertHelper.showAlert(withTitle: "Error", message: "Please enter a title.", from: self)
+            AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.errorEmptyTitleMessage, from: self)
             return
         }
         guard let amountString = amountOutlet.text, !amountString.isEmpty, let amount = Int(amountString) else {
-            AlertHelper.showAlert(withTitle: "Error", message: "Please enter a valid amount.", from: self)
+            AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.errorEmptyAmountMessage, from: self)
             return
         }
         guard let selectedImage = pickedImage else {
-            AlertHelper.showAlert(withTitle: "Error", message: "Please upload an image.", from: self)
+            AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.errorEmptyImageMessage, from: self)
             return
         }
         saveCategory(withTitle: title, amount: amount, image: selectedImage)
@@ -123,11 +123,11 @@ class AddCategoryViewController: UIViewController {
             try managedObjectContext.save()
             let storeURL = managedObjectContext.persistentStoreCoordinator?.persistentStores.first?.url
             print("Database location: \(storeURL?.path ?? "Unknown")")
-            showAlert(withTitle: "Success", message: "Category added successfully.") { [weak self] in
+            showAlert(withTitle: Message.successTitle, message: Message.successMessage) { [weak self] in
                 self?.clearFields()
             }
         } catch {
-            AlertHelper.showAlert(withTitle: "Error", message: "Failed to save category. Please try again.", from: self)
+            AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.errorSaveMessage, from: self)
         }
     }
     

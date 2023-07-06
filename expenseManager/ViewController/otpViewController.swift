@@ -53,18 +53,18 @@ class otpViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func resendOtpAction(_ sender: Any) {
         guard let phoneNumber = phoneNumber else {
-            AlertHelper.showAlert(withTitle: "Alert", message: "No phone number found.", from: self)
+            AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.errorPhoneMessage, from: self)
             return
         }
         
         resendOTP(phoneNumber: phoneNumber) { success, errorMessage in
             DispatchQueue.main.async {
                 if success {
-                    AlertHelper.showAlert(withTitle: "Success", message: "OTP has been resent successfully.", from: self)
+                    AlertHelper.showAlert(withTitle: Message.successTitle, message: Message.resendOTPSuccessMessage, from: self)
                 } else if let errorMessage = errorMessage {
-                    AlertHelper.showAlert(withTitle: "Alert", message: "Failed to resend OTP. Error: \(errorMessage)", from: self)
+                    AlertHelper.showAlert(withTitle: Message.alertTitle, message: "\(Message.errorSendOTPMessage) \(errorMessage)", from: self)
                 } else {
-                    AlertHelper.showAlert(withTitle: "Alert", message: "Failed to resend OTP.", from: self)
+                    AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.errorSendOTPMessage, from: self)
                 }
             }
         }

@@ -1,8 +1,3 @@
-//  ParticularExpenseViewController.swift
-//  expenseManager
-//
-//  Created by Nikhil Mallik on 30/05/23.
-//
 import UIKit
 import CoreData
 
@@ -38,12 +33,10 @@ class ParticularExpenseViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refreshExpenses), for: .valueChanged)
         tableView.refreshControl = refreshControl
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            print("Unable to access AppDelegate")
             return
         }
         managedObjectContext = appDelegate.persistentContainer.viewContext
         if managedObjectContext == nil {
-            print("Managed object context is nil")
             return
         }
         fetchDataForCategory()
@@ -106,16 +99,16 @@ class ParticularExpenseViewController: UIViewController {
               let description = descOutlet.text,
               !expenseAmountString.isEmpty,
               !description.isEmpty else {
-            AlertHelper.showAlert(withTitle: "Alert", message: "Please fill in all fields.", from: self)
+            AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.emptyWarningMessage, from: self)
             return
         }
         if expenseAmount > newlimitAmount {
-            AlertHelper.showAlert(withTitle: "Alert", message: "Expense amount exceeds the available limit.", from: self)
+            AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.amountExceedMessage, from: self)
             return
         }
         guard let selectedImage = ViewImage.image,
               let imageData = selectedImage.jpegData(compressionQuality: 1.0) else {
-            AlertHelper.showAlert(withTitle: "Alert", message: "Please select an image.", from: self)
+            AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.imageWarningMessage, from: self)
             return
         }
         saveExpenseData(expenseAmount: expenseAmount, description: description, imageData: imageData, categoryDocumentId: categoryDocumentId)
@@ -123,8 +116,7 @@ class ParticularExpenseViewController: UIViewController {
 
     func saveExpenseData(expenseAmount: Int, description: String, imageData: Data, categoryDocumentId: String) {
         guard !categoryDocumentId.isEmpty else {
-            AlertHelper.showAlert(withTitle: "Alert", message: "Category document ID is empty.", from: self)
-            print("Category document ID is empty.")
+            AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.emptyIDMessage, from: self)
             return
         }
         let expense = ExpenseEntity(context: managedObjectContext)
@@ -135,7 +127,7 @@ class ParticularExpenseViewController: UIViewController {
         expense.imageURL = imageData
         do {
             try managedObjectContext.save()
-            AlertHelper.showAlert(withTitle: "Alert", message: "Expense added successfully.", from: self)
+            AlertHelper.showAlert(withTitle: Message.successTitle, message: Message.successMessage, from: self)
             DispatchQueue.main.async { [weak self] in
                 self?.expAmtOutlet.text = nil
                 self?.descOutlet.text = nil
@@ -146,7 +138,7 @@ class ParticularExpenseViewController: UIViewController {
             updateCategoryTotalExpenseAmount(categoryDocumentId: categoryDocumentId, totalExpense: expenseAmount)
             fetchDataForCategory()
         } catch {
-            AlertHelper.showAlert(withTitle: "Alert", message: "Failed to add expense.", from: self)
+            AlertHelper.showAlert(withTitle: Message.errorTitle, message: Message.errorDataAddMessage, from: self)
         }
     }
 
@@ -155,7 +147,6 @@ class ParticularExpenseViewController: UIViewController {
             return
         }
         guard let managedObjectContext = managedObjectContext else {
-            print("Managed object context is nil")
             return
         }
         let fetchRequest: NSFetchRequest<ExpenseEntity> = ExpenseEntity.fetchRequest()
@@ -186,7 +177,7 @@ class ParticularExpenseViewController: UIViewController {
             }
             updateCategoryTotalExpenseAmount(categoryDocumentId: categoryDocumentId, totalExpense: totalExpense)
         } catch {
-            print("Error fetching expenses: \(error.localizedDescription)")
+            print("\(Message.errorFetechingDataMessage)\(error.localizedDescription)")
         }
         tableView.refreshControl?.endRefreshing()
     }
@@ -207,8 +198,8 @@ class ParticularExpenseViewController: UIViewController {
         let expense = expenses[indexPath.row]
         
         ConfirmationDialogHelper.showConfirmationDialog(on: self,
-                                                        title: "Delete Expense",
-                                                        message: "Are you sure you want to delete this expense?",
+                                                        title: Message.deleteTitle,
+                                                        message: Message.deleteMessage,
                                                         confirmActionTitle: "Delete",
                                                         cancelActionTitle: "Cancel") { [weak self] in
             // Perform delete operation here
@@ -219,7 +210,6 @@ class ParticularExpenseViewController: UIViewController {
     func deleteButtonTapped(at indexPath: IndexPath) {
         let expense = expenses[indexPath.row]
         guard let managedObjectContext = managedObjectContext else {
-            print("Managed object context is nil")
             return
         }
         let fetchRequest: NSFetchRequest<ExpenseEntity> = ExpenseEntity.fetchRequest()
@@ -228,7 +218,6 @@ class ParticularExpenseViewController: UIViewController {
         do {
             let fetchedExpenses = try managedObjectContext.fetch(fetchRequest)
             guard let expenseObject = fetchedExpenses.first else {
-                print("Expense not found.")
                 return
             }
             managedObjectContext.delete(expenseObject)
@@ -238,11 +227,10 @@ class ParticularExpenseViewController: UIViewController {
                 expenses.remove(at: indexPath.row)
                 tableView.reloadData()
             } catch {
-                print("Error deleting expense: \(error.localizedDescription)")
-                AlertHelper.showAlert(withTitle: "Alert", message: "Failed to delete expense.", from: self)
+                AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.deleteErrorMessage, from: self)
             }
         } catch {
-            print("Error fetching expense: \(error.localizedDescription)")
+            print("\(Message.errorFetechingDataMessage) \(error.localizedDescription)")
         }
     }
     func cornerRadius() {
@@ -259,18 +247,17 @@ class ParticularExpenseViewController: UIViewController {
         do {
             let fetchedCategories = try managedObjectContext.fetch(fetchRequest)
             guard let category = fetchedCategories.first else {
-                AlertHelper.showAlert(withTitle: "Alert", message: "Category not found.", from: self)
+                AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.dataNotFoundMessage, from: self)
                 return
             }
             category.totalAmount = Int64(totalExpense)
             do {
                 try managedObjectContext.save()
-                print("TotalAmount updated successfully")
             } catch {
-                print("Error updating TotalAmount: \(error.localizedDescription)")
+                print("\(Message.errorDataUpdateMessage) \(error.localizedDescription)")
             }
         } catch {
-            print("Error fetching category: \(error.localizedDescription)")
+            print("\(Message.errorFetechingDataMessage) \(error.localizedDescription)")
         }
     }
 }
