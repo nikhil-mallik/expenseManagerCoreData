@@ -10,7 +10,7 @@ import FirebaseAuth
 
 class otpViewController: UIViewController, UITextFieldDelegate {
     
-    
+    // MARK: - IBOutlets
     @IBOutlet weak var resendOtpOutlet: UIButton!
     @IBOutlet weak var OtpCodeOutlet: UITextField!
     @IBOutlet weak var verifyBtnOutlet: UIButton!
@@ -30,6 +30,7 @@ class otpViewController: UIViewController, UITextFieldDelegate {
         OtpCodeOutlet.delegate = self
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         KeyboardHelper.startObservingKeyboardNotifications(for: self)
@@ -40,8 +41,6 @@ class otpViewController: UIViewController, UITextFieldDelegate {
         KeyboardHelper.stopObservingKeyboardNotifications(for: self)
     }
     
-   
-    
     func resendOTP(phoneNumber: String, completion: @escaping (Bool, String?) -> Void) {
         // Simulating the resend OTP logic with a delay of 2 seconds
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -50,7 +49,7 @@ class otpViewController: UIViewController, UITextFieldDelegate {
             completion(success, errorMessage)
         }
     }
-    
+    // MARK: - Actions
     @IBAction func resendOtpAction(_ sender: Any) {
         guard let phoneNumber = phoneNumber else {
             AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.errorPhoneMessage, from: self)

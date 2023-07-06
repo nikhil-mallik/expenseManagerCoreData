@@ -37,4 +37,6 @@ struct Message {
     static let errorPhoneMessage = "No phone number found."
     static let resendOTPSuccessMessage = "OTP has been resent successfully."
     static let errorSendOTPMessage = "Failed to send OTP. Please try again."
+    static let errorEmptyPhoneMessage = "Please enter a phone number."
+    static let errorValidPhoneMessage = "Please enter a valid 10-digit phone number."
 }
