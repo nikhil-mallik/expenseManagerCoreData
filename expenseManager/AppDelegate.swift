@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.uploadDataToFirestore()
         }
         RunLoop.current.add(uploadTimer, forMode: .common)
-        
+        print(#function)
         return true
     }
     

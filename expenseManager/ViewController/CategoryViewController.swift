@@ -42,10 +42,8 @@ class CategoryViewController: UIViewController {
         if let currentUser = Auth.auth().currentUser {
             let userId = currentUser.uid
             self.userId = userId
-            print("Current user ID: \(userId)")
         } else {
             self.userId = nil
-            print("No current user found.")
         }
     }
     
@@ -82,7 +80,7 @@ class CategoryViewController: UIViewController {
     }
     
     @objc func showConfirmationDialog() {
-        ConfirmationDialogHelper.showConfirmationDialog(on: self, title: "Confirmation", message: "Are you sure you want to proceed?", confirmActionTitle: "Confirm", cancelActionTitle: "Cancel") {
+        ConfirmationDialogHelper.showConfirmationDialog(on: self, title: Message.confirmTitle, message: Message.confirmMessage, confirmActionTitle: "Confirm", cancelActionTitle: "Cancel") {
             self.logoutButton()
         }
     }
@@ -107,36 +105,49 @@ class CategoryViewController: UIViewController {
                     }
                 }
             } else {
-                AlertHelper.showAlert(withTitle: "Alert", message: "Error logging out", from: self!)
+                AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.logoutAlertMessage, from: self!)
             }
         }
     }
     
     func fetchCategories() {
-        guard let managedObjectContext = managedObjectContext else {
-            print("Managed object context is nil")
-            return
-        }
-        let fetchRequest: NSFetchRequest<CategoryEntity> = CategoryEntity.fetchRequest()
-        do {
-            let fetchedCategories = try managedObjectContext.fetch(fetchRequest)
-            // Process the fetched categories and populate the cardData array
-            cardData = fetchedCategories.map { category in
-                return CardModel(
-                    documentId: category.catId ?? "",
-                    titleOutlet: category.title ?? "",
-                    iconImageView: category.imageURL ?? Data(),
-                    expAmtOutlet: category.totalAmount,
-                    leftAmtOutlet: category.budget
-                )
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self = self else { return }
+            guard let managedObjectContext = self.managedObjectContext else { return }
+            
+            let fetchRequest: NSFetchRequest<CategoryEntity> = CategoryEntity.fetchRequest()
+            
+            do {
+                let fetchedCategories = try managedObjectContext.fetch(fetchRequest)
+                
+                DispatchQueue.main.async {
+                    self.processFetchedCategories(fetchedCategories)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    AlertHelper.showAlert(withTitle: Message.alertTitle, message: "\(Message.errorFetechingDataMessage) \(error.localizedDescription)", from: self)
+                }
             }
-            // Store the catId in a variable
-            categoryId = fetchedCategories.first?.catId
-            tableShowOutlet.reloadData()
-            noRecordFound.isHidden = !cardData.isEmpty
-        } catch {
-            AlertHelper.showAlert(withTitle: "Alert", message: "Error fetching categories from Core Data: \(error.localizedDescription)", from: self)
         }
+    }
+
+    func processFetchedCategories(_ fetchedCategories: [CategoryEntity]) {
+        // Process the fetched categories and populate the cardData array
+        cardData = fetchedCategories.map { category in
+            return CardModel(
+                documentId: category.catId ?? "",
+                titleOutlet: category.title ?? "",
+                iconImageView: category.imageURL ?? Data(),
+                expAmtOutlet: category.totalAmount,
+                leftAmtOutlet: category.budget
+            )
+        }
+        
+        // Store the catId in a variable
+        categoryId = fetchedCategories.first?.catId
+        
+        tableShowOutlet.reloadData()
+        noRecordFound.isHidden = !cardData.isEmpty
     }
     
     func detailAction(indexPath: IndexPath) {
@@ -176,7 +187,7 @@ class CategoryViewController: UIViewController {
         do {
             let fetchedCategories = try context.fetch(fetchRequest)
             guard let category = fetchedCategories.first else {
-                AlertHelper.showAlert(withTitle: "Alert", message: "Category not found.", from: self)
+                AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.dataNotFoundMessage, from: self)
                 return
             }
             // Pass the category object to the EditCategoryViewController
@@ -184,7 +195,7 @@ class CategoryViewController: UIViewController {
             // Push the EditCategoryViewController to the navigation stack
             navigationController?.pushViewController(editCategoryViewController, animated: true)
         } catch {
-            AlertHelper.showAlert(withTitle: "Alert", message: "Error fetching category: \(error.localizedDescription)", from: self)
+            AlertHelper.showAlert(withTitle: Message.alertTitle, message: "\(Message.errorFetechingDataMessage) \(error.localizedDescription)", from: self)
         }
     }
     
@@ -196,8 +207,8 @@ class CategoryViewController: UIViewController {
         let category = cardData[indexPath.row]
         
         ConfirmationDialogHelper.showConfirmationDialog(on: self,
-                                                        title: "Delete Category",
-                                                        message: "Are you sure you want to delete \(category.titleOutlet)?",
+                                                        title: Message.deleteTitle,
+                                                        message: "\(Message.deleteMessage) \(category.titleOutlet)?",
                                                         confirmActionTitle: "Delete",
                                                         cancelActionTitle: "Cancel") { [weak self] in
             // Perform delete operation here
@@ -213,34 +224,41 @@ class CategoryViewController: UIViewController {
         
         let category = cardData[indexPath.row]
         
-        guard let managedObjectContext = managedObjectContext else {
-            print("Managed object context is nil")
-            return
-        }
-        
-        do {
+        DispatchQueue.global().async { [weak self] in
+            // Perform the deletion on a background thread
+            guard let self = self else { return }
+            guard let managedObjectContext = self.managedObjectContext else { return }
+            
             let fetchRequest: NSFetchRequest<CategoryEntity> = CategoryEntity.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "catId == %@", category.documentId)
             
-            let fetchedCategories = try managedObjectContext.fetch(fetchRequest)
-            
-            if let categoryObject = fetchedCategories.first {
-                cardData.remove(at: indexPath.row) // Remove category from cardData array
+            do {
+                let fetchedCategories = try managedObjectContext.fetch(fetchRequest)
                 
-                managedObjectContext.delete(categoryObject)
-                
-                do {
-                    try managedObjectContext.save()
-                    tableShowOutlet.deleteRows(at: [indexPath], with: .automatic)
-                    noRecordFound.isHidden = !cardData.isEmpty
-                } catch {
-                    AlertHelper.showAlert(withTitle: "Alert", message: "Error deleting category: \(error.localizedDescription)", from: self)
+                if let categoryObject = fetchedCategories.first {
+                    // Remove category from cardData array
+                    self.cardData.remove(at: indexPath.row)
+                    managedObjectContext.delete(categoryObject)
+                    
+                    DispatchQueue.main.async {
+                        // Update UI on the main thread
+                        do {
+                            try managedObjectContext.save()
+                            self.tableShowOutlet.deleteRows(at: [indexPath], with: .automatic)
+                            self.noRecordFound.isHidden = !self.cardData.isEmpty
+                        } catch {
+                            AlertHelper.showAlert(withTitle: Message.alertTitle, message: "\(Message.deleteErrorMessage) \(error.localizedDescription)", from: self)
+                        }
+                    }
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    AlertHelper.showAlert(withTitle: Message.alertTitle, message: "\(Message.errorFetechingDataMessage) \(error.localizedDescription)", from: self)
                 }
             }
-        } catch {
-            AlertHelper.showAlert(withTitle: "Alert", message: "Error fetching category from Core Data: \(error.localizedDescription)", from: self)
         }
     }
+
     
     // MARK: Actions
     @IBAction func navtoCateAction(_ sender: Any) {

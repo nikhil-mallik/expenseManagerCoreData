@@ -15,7 +15,7 @@ class phoneViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         phoneTextOutlet.delegate = self
-      
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +58,7 @@ class phoneViewController: UIViewController, UITextFieldDelegate {
                 }
             } else {
                 // Show the error message in an alert
-                AlertHelper.showAlert(withTitle: "Alert", message: "Failed to send OTP. Please try again.", from: self!)
+                AlertHelper.showAlert(withTitle: Message.alertTitle, message: Message.errorSendOTPMessage, from: self!)
                 
             }
         }

@@ -75,7 +75,7 @@ class EditExpenseViewController: UIViewController {
                 print("Expense not found.")
             }
         } catch {
-            print("Error fetching expense: \(error.localizedDescription)")
+            print("\(Message.errorFetechingDataMessage) \(error.localizedDescription)")
         }
     }
     
@@ -97,7 +97,7 @@ class EditExpenseViewController: UIViewController {
             let results = try managedObjectContext.fetch(fetchRequest)
             return results.first
         } catch {
-            print("Error fetching category: \(error.localizedDescription)")
+            print("\(Message.errorFetechingDataMessage) \(error.localizedDescription)")
             return nil
         }
     }
@@ -138,7 +138,7 @@ class EditExpenseViewController: UIViewController {
             let sum = limit + Int(expense.expAmt)
             
             if let updatedExpense = Int64(updatedExpenseAmount), updatedExpense > sum {
-                AlertHelper.showAlert(withTitle: "Limit Exceeded", message: "The updated expense amount exceeds the limit.", from: self)
+                AlertHelper.showAlert(withTitle: Message.limitExceedTitle, message: Message.limitExceedMessage, from: self)
                 return
             }
             
@@ -150,11 +150,11 @@ class EditExpenseViewController: UIViewController {
             }
             
             try managedObjectContext.save() // Save the changes to the managed object context
-            AlertHelper.showAlert(withTitle: "Success", message: "Expense updated successfully.", from: self) {
+            AlertHelper.showAlert(withTitle: Message.successTitle, message: Message.successUpdateMessage, from: self) {
                 self.navigationController?.popViewController(animated: true) // Pop the view controller from the navigation stack
             }
         } catch {
-            print("Error updating expense: \(error.localizedDescription)")
+            print("\(Message.errorDataUpdateMessage) \(error.localizedDescription)")
         }
     }
 }
